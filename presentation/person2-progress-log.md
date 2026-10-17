@@ -8,7 +8,7 @@ Started: October 17, 2026. Dates use America/Chicago.
 
 Record what we built, why we made decisions, what we learned, and the evidence supporting our presentation. Both teammates can read this log. This records work performed by the user with Codex assistance; it does not imply every implementation or test was performed manually by the user.
 
-Append an entry after each meaningful implementation, experiment, or scope decision during active project work. Do not silently rewrite previous conclusions: append corrections and link the relevant commit or result. Mark each item as completed, observed, planned, proposed, blocked, or superseded. A plan is not a result, and mock data is not pathology evidence. No background updates are implied.
+Append an entry after each meaningful implementation, experiment, or scope decision during active project work. Do not silently rewrite previous conclusions: append corrections and link the relevant commit or result. Mark each item as completed, observed, planned, proposed, blocked, or superseded. A plan is not a result, and mock data is not pathology evidence. No background updates are implied. Use one date heading per day and smaller time-stamped milestone headings underneath. Times use America/Chicago and refer to when updates were recorded or committed; the first three entries were recorded retrospectively at 3:50 p.m.
 
 ## Team boundaries and agreed decisions
 
@@ -24,53 +24,6 @@ Append an entry after each meaningful implementation, experiment, or scope decis
 | Evaluation | Tune on validation; reserve test for final evaluation. | Avoid selecting methods using final results. |
 
 See [COLLABORATION.md](../COLLABORATION.md) for the shared agreement.
-
-## October 17, 2026 — Scope and evaluation design
-
-**Status: completed planning; implementation pending.**
-
-We reviewed the proposal and technical contract and confirmed our role as Person 2. The intended contribution is to help users inspect competing tissue categories using labeled references, and evaluate whether comparative retrieval adds useful information.
-
-Decisions:
-- Develop against mock or saved backend responses instead of depending on live CONCH inference.
-- Preserve the backend contract and split configuration.
-- Compare class-aware nearest neighbors against contrastive reranking using the same queries, gallery, candidates and reference counts.
-- Separate embedding-based properties from expert judgments of usefulness.
-- Describe references as comparative examples, not proof of classifier reasoning.
-- Treat nine tissue categories as tissue categories, not nine clinical diagnoses.
-
-Why this matters for judges: the project has a testable question beyond classifier accuracy. The question is whether the retrieved examples are useful for comparison, including when the model is wrong.
-
-Evidence: the project discussion and imported starter source. No user study, expert preference finding, or performance improvement has been established.
-
-## October 17, 2026 — Shared repository established
-
-**Status: completed.**
-
-- Created the private repository under plavsic2.
-- Imported starter source without changing the analysis schema or split configuration.
-- Added the collaboration agreement.
-- Sent an invitation to SVYDYA123. It was pending acceptance when sent; acceptance has not been rechecked for this entry.
-- Excluded the ZIP's synthetic validation/test result files from the initial commit so they cannot be mistaken for actual pathology findings.
-
-Evidence: [starter import commit](https://github.com/plavsic2/pathology-evidence/commit/aab37217d128e5523a9769df668caa233e83a7cb).
-
-Verification performed: all 14 Python source files parsed successfully; the extracted JSON files parsed successfully.
-Verification not performed: automated runtime tests, actual CONCH endpoint calls, Delta integration, real-data evaluation. The local runtime lacked several project dependencies.
-
-## October 17, 2026 — Interface issues identified in source review
-
-**Status: observed; fixes pending.**
-
-| Finding | Consequence | Planned action |
-| --- | --- | --- |
-| Query picker displays the dataset label even with ground truth hidden. | A reviewer can see the answer before judging examples. | Remove labels from picker text in review mode. |
-| Mock response has empty image paths and fabricated scores. | Layout development is possible, but meaningful visual comparison is not. | Add clearly marked demonstration assets without presenting them as pathology results. |
-| Existing screen shows one named method at a time. | It does not support blinded comparison. | Add anonymous A/B panels with persisted randomization. |
-| Existing evaluation reports embedding similarity, margins and a diversity proxy. | These do not establish clinical usefulness; margins are optimized by reranking. | Add a separate reviewer protocol and response capture. |
-| Ground truth remains in the frozen backend response. | Hiding it requires care across all review surfaces, including raw JSON. | Keep it concealed in blinded UI; do not change schema unilaterally. |
-
-These findings came from reading code, not from a completed interactive application test.
 
 ## Ambition roadmap within Person 2 ownership
 
@@ -131,7 +84,9 @@ Do not add another model, whole-slide processing, automated morphology detection
 
 ## Template for future entries
 
-### YYYY-MM-DD — Milestone or decision
+For a new day, add `## MM/DD/YYYY` once. Under the current day, use:
+
+### h:mm a.m./p.m. — Milestone or decision
 
 - Status:
 - Work completed:
@@ -146,7 +101,56 @@ Do not add another model, whole-slide processing, automated morphology detection
 
 Do not include secrets, API keys, identifying reviewer details or unapproved patient data.
 
-## October 17, 2026 — Organizer links checked
+## 10/17/2026
+
+### 3:50 p.m. — Scope and evaluation design
+
+**Status: completed planning; implementation pending.**
+
+We reviewed the proposal and technical contract and confirmed our role as Person 2. The intended contribution is to help users inspect competing tissue categories using labeled references, and evaluate whether comparative retrieval adds useful information.
+
+Decisions:
+- Develop against mock or saved backend responses instead of depending on live CONCH inference.
+- Preserve the backend contract and split configuration.
+- Compare class-aware nearest neighbors against contrastive reranking using the same queries, gallery, candidates and reference counts.
+- Separate embedding-based properties from expert judgments of usefulness.
+- Describe references as comparative examples, not proof of classifier reasoning.
+- Treat nine tissue categories as tissue categories, not nine clinical diagnoses.
+
+Why this matters for judges: the project has a testable question beyond classifier accuracy. The question is whether the retrieved examples are useful for comparison, including when the model is wrong.
+
+Evidence: the project discussion and imported starter source. No user study, expert preference finding, or performance improvement has been established.
+
+### 3:50 p.m. — Shared repository established
+
+**Status: completed.**
+
+- Created the private repository under plavsic2.
+- Imported starter source without changing the analysis schema or split configuration.
+- Added the collaboration agreement.
+- Sent an invitation to SVYDYA123. It was pending acceptance when sent; acceptance has not been rechecked for this entry.
+- Excluded the ZIP's synthetic validation/test result files from the initial commit so they cannot be mistaken for actual pathology findings.
+
+Evidence: [starter import commit](https://github.com/plavsic2/pathology-evidence/commit/aab37217d128e5523a9769df668caa233e83a7cb).
+
+Verification performed: all 14 Python source files parsed successfully; the extracted JSON files parsed successfully.
+Verification not performed: automated runtime tests, actual CONCH endpoint calls, Delta integration, real-data evaluation. The local runtime lacked several project dependencies.
+
+### 3:50 p.m. — Interface issues identified in source review
+
+**Status: observed; fixes pending.**
+
+| Finding | Consequence | Planned action |
+| --- | --- | --- |
+| Query picker displays the dataset label even with ground truth hidden. | A reviewer can see the answer before judging examples. | Remove labels from picker text in review mode. |
+| Mock response has empty image paths and fabricated scores. | Layout development is possible, but meaningful visual comparison is not. | Add clearly marked demonstration assets without presenting them as pathology results. |
+| Existing screen shows one named method at a time. | It does not support blinded comparison. | Add anonymous A/B panels with persisted randomization. |
+| Existing evaluation reports embedding similarity, margins and a diversity proxy. | These do not establish clinical usefulness; margins are optimized by reranking. | Add a separate reviewer protocol and response capture. |
+| Ground truth remains in the frozen backend response. | Hiding it requires care across all review surfaces, including raw JSON. | Keep it concealed in blinded UI; do not change schema unilaterally. |
+
+These findings came from reading code, not from a completed interactive application test.
+
+### 3:54 p.m. — Organizer links checked
 
 **Status: Box guide reviewed; Slack messages not accessed.**
 
@@ -160,7 +164,7 @@ The supplied [Slack channel](https://app.slack.com/client/T0C8M0NR3J4/C0C7W9RKMS
 
 Decision: retain the agreed MVP and comparison evaluation. Do not change the backend schema, split or compute assumptions based on unread messages. Check current Slack announcements once access is available.
 
-## October 17, 2026 — Slack access established and compute guidance reviewed
+### 3:55 p.m. — Slack access established and compute guidance reviewed
 
 **Status: completed read-only review; no cluster access or implementation claimed.**
 
@@ -180,7 +184,7 @@ Sources: [hosted models announcement](https://app.slack.com/archives/C0C7W9RKMSQ
 
 Decision: prioritize cached/offline compatibility and continue Person 2 development with mocks while Person 1 establishes real artifacts. No schema or split changes. Credentials seen in Slack are intentionally not reproduced in the log or repository.
 
-## October 17, 2026 — Person 2 blinded review MVP implemented
+### 4:05 p.m. — Person 2 blinded review MVP implemented
 
 **Status: implemented and locally tested on person2/blinded-review; pending merge and real-data integration.**
 
@@ -206,7 +210,7 @@ Limitations: automated interaction checks are not visual browser QA or clinical 
 
 Still pending: true image assets, shared Delta path, real validation integration, failure-case browser, automated plots, expert feedback and final held-out evaluation. No clinical usefulness improvement is claimed.
 
-## October 17, 2026 — Failure inspection, provenance and presentation exports
+### 4:16 p.m. — Failure inspection, provenance and presentation exports
 
 **Status: implemented on Person 2 branch; tested with mock and temporary abstract images; pending real artifact integration.**
 
@@ -224,7 +228,7 @@ Professional rationale: compare method outputs without quietly rewriting ranking
 
 Remaining external dependencies: teammate's actual artifacts and authoritative manifest, shared storage path, agreed review sample, and domain reviewer feedback. No accuracy, preference or clinical benefit result is established. Presentation materials can now be exported from future real review records instead of fabricated examples.
 
-## October 17, 2026 — Swiss-style typography and Catppuccin Mocha theme
+### 4:20 p.m. — Swiss-style typography and Catppuccin Mocha theme
 
 **Status: implemented on Person 2 branch and visually checked.**
 
@@ -232,7 +236,7 @@ User requested a Swiss Knife or similar font and Catppuccin colors. Applied a lo
 
 Verification: both existing Streamlit interface behavior tests passed after styling. Visually inspected the comparison screen in the local browser and adjusted caption contrast. No backend logic, response schema, split, manifest or ranking behavior changed.
 
-## October 17, 2026 — Approved black-and-yellow palette
+### 4:23 p.m. — Approved black-and-yellow palette
 
 **Status: implemented following user approval of the palette preview.**
 
@@ -240,7 +244,7 @@ Replaced Catppuccin Mocha colors with warm black #101010, panels #191919, border
 
 Verification: Python styling source and TOML theme configuration parse. Browser preview checked. This is a presentation-only change; no new experiment results are implied.
 
-## October 17, 2026 — Reviewer onboarding and protocol package
+### 4:37 p.m. — Reviewer onboarding and protocol package
 
 **Status: implemented and checked on Person 2 branch; no real reviewer outcomes claimed.**
 

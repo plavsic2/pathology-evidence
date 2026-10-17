@@ -159,3 +159,23 @@ The guide describes preloaded CONCH/MUSK resources but does not establish the cu
 The supplied [Slack channel](https://app.slack.com/client/T0C8M0NR3J4/C0C7W9RKMSQ) redirected to workspace sign-in. No channel messages or current announcements were read. Slack integration was offered as an access option; connection remains unconfirmed.
 
 Decision: retain the agreed MVP and comparison evaluation. Do not change the backend schema, split or compute assumptions based on unread messages. Check current Slack announcements once access is available.
+
+## October 17, 2026 — Slack access established and compute guidance reviewed
+
+**Status: completed read-only review; no cluster access or implementation claimed.**
+
+Read the supplied #all-hackathon channel and its referenced #compute-issues channel after Slack was connected. This supersedes the previous access limitation.
+
+Verified organizer announcements:
+- Hosted pathology models are scheduled through Sunday, October 18 at 6 p.m. Central. Calls must originate inside Delta. Cache required embeddings and export permitted demo assets before service closure.
+- The shared service is intended for up to a few thousand tiles; whole-dataset jobs should use team GPU allocations. Our proposed 3,150-image extraction should respect service capacity and organizer guidance.
+- Team outputs may use /work/nvme/bfqi/teams/<team-name>. The exact team directory remains a team decision, not yet configured.
+- /work/nvme is not backed up, and the hackathon directories are readable by other participants. Keep credentials and private material out; back up permitted artifacts appropriately.
+- Organizers reported /work/hdd filesystem problems and advised avoiding it.
+- Login nodes were unstable/rebooted during the afternoon. At 3:47 p.m. Central, the technical organizer reported login02 and login03 looking better. This is a timestamped report, not a guarantee of current availability. Interactive Open OnDemand applications were suggested as an alternative.
+- Quilt is available as a shared read-only resource. We are not expanding our agreed CONCH/CRC MVP to add it.
+- Use a single model per experiment; embeddings from different models are not interchangeable.
+
+Sources: [hosted models announcement](https://app.slack.com/archives/C0C7W9RKMSQ/p1792241751791109), [storage guidance](https://app.slack.com/archives/C0C7W9RKMSQ/p1792244622730939), [technical channel](https://app.slack.com/client/T0C8M0NR3J4/C0C7SRT9QJ2).
+
+Decision: prioritize cached/offline compatibility and continue Person 2 development with mocks while Person 1 establishes real artifacts. No schema or split changes. Credentials seen in Slack are intentionally not reproduced in the log or repository.

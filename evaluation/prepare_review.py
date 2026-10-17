@@ -5,6 +5,7 @@ import hashlib
 import shutil
 from pathlib import Path
 from evaluation.review import validate_pair
+from evaluation.priority_cases import PRIORITY_CASES, select_queries
 
 
 def main():
@@ -13,16 +14,23 @@ def main():
     p.add_argument('--split', choices=['val', 'test'], default='val')
     p.add_argument('--final-test', action='store_true', help='Explicitly acknowledge final held-out evaluation')
     p.add_argument('--limit', type=int, default=30)
+    group = p.add_mutually_exclusive_group()
+    group.add_argument('--priority-cases', action='store_true', help='Export the four handpicked validation investigation cases')
+    group.add_argument('--query-ids', nargs='+', help='Explicit query IDs, all must belong to selected split')
     args = p.parse_args()
     if args.split == 'test' and not args.final_test:
         p.error('Test export requires --final-test; develop using validation only.')
     if args.limit < 1:
         p.error('Limit must be positive')
+    if args.priority_cases and args.split != 'val':
+        p.error('Priority cases are validation-only')
     # No new backend API: only two calls to the existing function.
     from src.engine import load_engine
     engine = load_engine()
-    ids = sorted(engine.df.loc[engine.df.split == args.split, 'image_id'].tolist())[:args.limit]
+    ids = select_queries(engine.df, args.split, list(PRIORITY_CASES) if args.priority_cases else args.query_ids, args.limit)
     out = Path(args.output)
+    if out.exists() and any(out.iterdir()):
+        raise FileExistsError('Use a new empty output directory; existing review exports are immutable')
     out.mkdir(parents=True, exist_ok=True)
     (out / 'images').mkdir(exist_ok=True)
     engine.df.to_csv(out / 'splits.csv', index=False)

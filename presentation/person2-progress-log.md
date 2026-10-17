@@ -19,7 +19,7 @@ Append an entry after each meaningful implementation, experiment, or scope decis
 | Dataset | Proposed 3,150 images: 1,800 train, 225 validation, 675 gallery, 450 test, provided sufficient usable data exists. | Establish a manageable prototype with distinct partition roles. |
 | Split manifest | Person 1 generates and commits it once; do not change it after embedding begins without discussion and rebuilding affected artifacts. | Preserve vector alignment and experimental comparability. |
 | Integration | Freeze analyze_query() and its JSON schema for the MVP; discuss changes together first. | Protect independent implementation and integration. |
-| Shared artifacts | One shared Delta directory for embeddings, classifier and results. Exact path still pending agreement. | Avoid inconsistent copies and duplicate computation. |
+| Shared artifacts | Agreed on October 17: `/work/nvme/bfqi/teams/team58/pathology-artifacts`. | Avoid inconsistent copies and duplicate computation. |
 | Scope | CONCH tissue-category comparison; no FPGA work. | Keep effort on the chosen workflow and evaluation. |
 | Evaluation | Tune on validation; reserve test for final evaluation. | Avoid selecting methods using final results. |
 
@@ -267,3 +267,16 @@ The first interface test after these changes caught a positional selector that n
 Agreement check: no backend source, analyze_query() response schema, dataset split settings or shared split manifest changed. Streamlit's existing minimum dependency was raised from 1.32 to 1.36 because the dedicated reviewer entrypoint uses explicit page registration. No new runtime package was added.
 
 Remaining dependencies: actual artifacts, agreed shared directory, real frozen case list, domain feedback and final data evaluation. These additions provide the tools and protocol; they do not prove usefulness, diagnostic accuracy, patient independence or reduced harm.
+
+### 6:28 p.m. — Partner backend integration and targeted failure inspection
+
+**Status: implemented and locally tested; real Delta/image execution pending.**
+
+- Verification: all 23 combined tests passed, including synthetic backend contract tests, validation-manifest checks, and an AppTest proving the investigator view calls both existing retrieval methods for the selected priority query. These tests do not inspect real tissue references.
+- Agreed `ARTIFACT_DIR`: `/work/nvme/bfqi/teams/team58/pathology-artifacts`.
+- Incorporated Person 1 commit `a08ccc6ccac0cb883e9dc5f796411575ed9182bc` and its 3,150-row split manifest unchanged; backend schema and implementation remain unchanged.
+- Partner reports completed embeddings, trained classifier, and three retrieval methods passing integration checks. Independently checked committed validation table: 215/225 correct (95.56%); all four requested cases belong to validation. This verifies the table, not a rerun on cached embeddings.
+- Added cached-engine investigator review for the four priority cases, named side-by-side methods, aligned class ordering, candidate-omission warning, and portable targeted export with explicit query selection and overwrite protection.
+- Ambition: inspect whether reranking reinforces errors, including high-score errors and missing true candidates. Handpicked cases remain exploratory, separate from the representative blinded cohort.
+- Real image/reference inspection is pending Delta access or a portable export. No tissue images or classifier cache are available on this workstation. Launch/export steps: `presentation/delta-integration.md`.
+

@@ -179,3 +179,29 @@ Verified organizer announcements:
 Sources: [hosted models announcement](https://app.slack.com/archives/C0C7W9RKMSQ/p1792241751791109), [storage guidance](https://app.slack.com/archives/C0C7W9RKMSQ/p1792244622730939), [technical channel](https://app.slack.com/client/T0C8M0NR3J4/C0C7SRT9QJ2).
 
 Decision: prioritize cached/offline compatibility and continue Person 2 development with mocks while Person 1 establishes real artifacts. No schema or split changes. Credentials seen in Slack are intentionally not reproduced in the log or repository.
+
+## October 17, 2026 — Person 2 blinded review MVP implemented
+
+**Status: implemented and locally tested on person2/blinded-review; pending merge and real-data integration.**
+
+Delivered:
+- Replaced the development screen with an independent comparison workflow: abstract mock fixtures, saved response pairs, and lazy loading of the cached backend.
+- Removed answer-bearing query labels from selection, and removed source IDs, filenames, raw JSON, scores and method names from blinded displays.
+- Sorted candidate categories alphabetically to avoid revealing classifier rank.
+- Added deterministic per-session A/B assignment, anonymous role capture, tie/neither responses and optional comments.
+- Added SQLite persistence keyed by reviewer session and exact response-pair SHA-256. Re-submission replaces a prior response instead of double counting it.
+- Disabled submission when required images are missing or a case has been unblinded in that browser session.
+- Added investigator-only CSV, summary JSON and Markdown count-table export. Mock responses are excluded; spreadsheet formula text in comments is escaped.
+- Added pair-comparability validation and a review protocol guide.
+
+Agreement check: no src/ backend files, analyze_query() schema, split settings, or manifest changed. The two-response saved bundle is a Person 2 wrapper around unchanged backend results. No Delta SSH access needed for development.
+
+Professional decisions: use Streamlit's AppTest to verify interaction behavior rather than relying only on screenshots; use standard-library SQLite for durable, duplicate-resistant records; record exact input fingerprints for traceability; avoid confidence claims from ranking-score improvement.
+
+Verification: 4 review-logic unit tests and 1 Streamlit AppTest scenario passed (5 total). AppTest covered mock rendering, no truth checkbox/raw JSON in initial blinded mode, successful tie submission, blocking previously exposed cases, and empty saved-bundle handling. A separate smoke check verified investigator export, mock exclusion and spreadsheet formula escaping. A missing cached engine was also checked without an application crash. Changed Python files parse successfully.
+
+A Windows SQLite file-lock failure in the first unit-test run revealed unclosed database connections. Explicit connection closing fixed it; the tests were rerun successfully. A test script path was also corrected before the final successful run.
+
+Limitations: automated interaction checks are not visual browser QA or clinical evaluation. No actual pathology images, expert reviews or real CONCH outputs have been evaluated. Blinding is a workflow aid, not security against source inspection/session resets. Reviewer sessions are self-reported identities. Saved response provenance must be checked against the shared manifest. Use a designated review host and persistent writable storage for the MVP.
+
+Still pending: true image assets, shared Delta path, real validation integration, failure-case browser, automated plots, expert feedback and final held-out evaluation. No clinical usefulness improvement is claimed.

@@ -6,11 +6,13 @@ from pathlib import Path
 import streamlit as st
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
+from app.theme import apply_theme
 from evaluation.case_audit import audit_case, verify_manifest
 from evaluation.review import fingerprint
 from evaluation.evidence_export import case_html
 
 st.set_page_config(page_title='Failure review', layout='wide')
+apply_theme()
 st.title('Failure review')
 st.warning('Investigator view: reveals labels and method identities. Cases opened here cannot be submitted as blinded in this browser session.')
 folder = Path(os.environ.get('REVIEW_BUNDLE_DIR', str(ROOT / 'artifacts/review_bundles')))

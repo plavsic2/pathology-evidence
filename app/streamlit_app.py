@@ -9,10 +9,12 @@ from pathlib import Path
 import streamlit as st
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
+from app.theme import apply_theme
 from evaluation.review import assignment, fingerprint, save_review, validate_pair
 from evaluation.case_audit import verify_manifest
 NAMES = json.loads((ROOT / 'config/classes.json').read_text())["names"]
 st.set_page_config(page_title="Tissue Evidence Explorer", layout="wide")
+apply_theme()
 st.title("Tissue Evidence Explorer")
 st.caption("Compare tissue categories using reference examples. Research prototype.")
 

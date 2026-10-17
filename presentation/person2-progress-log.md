@@ -223,3 +223,11 @@ Visual QA: opened the local Streamlit preview in the browser and inspected the m
 Professional rationale: compare method outputs without quietly rewriting rankings; identify identical-output cases; require partition provenance before accepting real reviews; keep investigator evidence separate from blinded evaluation; preserve portable evidence and explicit negative findings.
 
 Remaining external dependencies: teammate's actual artifacts and authoritative manifest, shared storage path, agreed review sample, and domain reviewer feedback. No accuracy, preference or clinical benefit result is established. Presentation materials can now be exported from future real review records instead of fabricated examples.
+
+## October 17, 2026 — Swiss-style typography and Catppuccin Mocha theme
+
+**Status: implemented on Person 2 branch and visually checked.**
+
+User requested a Swiss Knife or similar font and Catppuccin colors. Applied a local Helvetica Neue / Helvetica / Arial / sans-serif stack for a Swiss-style look, rather than bundling a commercial font. Added Catppuccin Mocha backgrounds, lavender accents, readable foregrounds, cyan focus outlines and shared styling for both comparison and investigator pages.
+
+Verification: both existing Streamlit interface behavior tests passed after styling. Visually inspected the comparison screen in the local browser and adjusted caption contrast. No backend logic, response schema, split, manifest or ranking behavior changed.

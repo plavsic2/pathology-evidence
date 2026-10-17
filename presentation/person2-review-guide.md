@@ -39,3 +39,16 @@ Run `python -m evaluation.export_review --db artifacts/reviews.sqlite3 --output 
 ## Remaining extensions
 
 Failure-case browsing, automatic plots, full contract validation, independent-patient evaluation and formal user-accuracy studies remain separate work. This implementation does not claim those features or outcomes.
+
+
+## Failure browser and provenance gate
+
+The Failure review page is investigator-only. It filters saved cases by incorrect prediction, correct class outside candidates, or identical reference sets, and displays reference overlap plus the top-score gap. The gap is descriptive, not calibrated uncertainty. Opening a case marks it exposed for the same browser session.
+
+Blinded non-mock submission now requires the authoritative split manifest: set SPLIT_MANIFEST (default data/splits.csv). It checks query partition and labels, gallery IDs/labels, duplicate IDs and exact hashes crossing partitions. Development expects val; set REVIEW_SPLIT=test only after method freeze for a planned final evaluation. These checks verify identifiers and manifest consistency. Optional original-file hashing is available in the failure browser; converted demo PNGs will not match source TIFF hashes. Patient independence is still not established.
+
+Person 2 can prepare saved pairs with python -m evaluation.prepare_review --limit 30. It calls the existing engine and changes no backend interface. This convenience sample is the first sorted validation IDs, not an unbiased expert-review design; agree on case selection before formal review. Test preparation requires both --split test and --final-test. The adapter copies original image files into its images/ subfolder, writes relative paths in the saved responses, and includes splits.csv from the cached manifest. Keep the folder intact when copying it and point SPLIT_MANIFEST at this manifest copy; compare its hash with the authoritative team manifest. Both method responses must identify the same query.
+
+Investigator exports now include review_dashboard.html, a standalone count display suitable for presentation preparation. Empty real-review data produces an explicit no-results message. The failure page can download a self-contained comparison HTML with embedded images and the exact response-pair fingerprint; it reveals methods and labels and must stay separate from blinded review.
+
+Remaining work: actual artifacts, clinician feedback, case-sampling agreement and final evaluation. No clinical outcome is claimed from these tools.

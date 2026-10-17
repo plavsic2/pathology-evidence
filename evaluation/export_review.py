@@ -4,6 +4,7 @@ import csv
 import json
 from pathlib import Path
 from evaluation.review import read_reviews, summarize
+from evaluation.evidence_export import summary_html
 
 
 def export(db, output):
@@ -25,6 +26,7 @@ def export(db, output):
     report += '| Preference | Count |\n| --- | --- |\n' + ''.join(f'| {m} | {v} |\n' for m, v in counts.items())
     report += '\n' + summary['limitation'] + '\n\nReviewer qualifications are self-reported. Mock responses are excluded from these counts. Report sampling and reviewer roles alongside results.\n'
     (output / 'review_report.md').write_text(report)
+    (output / "review_dashboard.html").write_text(summary_html(summary), encoding="utf-8")
     return summary
 
 

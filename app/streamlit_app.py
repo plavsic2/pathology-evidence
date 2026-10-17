@@ -10,6 +10,7 @@ import streamlit as st
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from evaluation.review import assignment, fingerprint, save_review, validate_pair
+from evaluation.case_audit import verify_manifest
 NAMES = json.loads((ROOT / 'config/classes.json').read_text())["names"]
 st.set_page_config(page_title="Tissue Evidence Explorer", layout="wide")
 st.title("Tissue Evidence Explorer")
@@ -77,6 +78,17 @@ def image_data(path):
 missing = not mock and any(image_data(item['image_path']) is None for result in bundle.values() for item in [result['query']] + [r for c in result['predictions'] for r in c['references']])
 if missing:
     st.error('Images are missing. Submission is disabled until all query and reference images are available.')
+provenance_ok = mock
+if not mock:
+    manifest = Path(os.environ.get('SPLIT_MANIFEST', str(ROOT / 'data/splits.csv')))
+    if manifest.is_file():
+        try:
+            checked = verify_manifest(bundle, manifest, asset_root, allowed_split=os.environ.get('REVIEW_SPLIT', 'val'))
+            provenance_ok = checked['passed']
+        except (ValueError, KeyError, OSError, TypeError):
+            provenance_ok = False
+    if not provenance_ok:
+        st.warning('Review saving requires the agreed split manifest and matching gallery/query labels. Configure SPLIT_MANIFEST. Development defaults to validation queries.')
 if 'review_session' not in st.session_state:
     st.session_state.review_session = uuid.uuid4().hex
 session = st.sidebar.text_input('Anonymous reviewer session', value=st.session_state.review_session)
@@ -123,7 +135,7 @@ if blinded:
     with st.form('reference_review'):
         choice = st.radio('Preference', ['A', 'B', 'tie', 'neither'], index=None)
         note = st.text_area('Why? Optional. Do not enter identifying or patient information.', max_chars=2000)
-        submitted = st.form_submit_button('Save review', disabled=bool(missing) or digest in exposed)
+        submitted = st.form_submit_button('Save review', disabled=bool(missing) or not provenance_ok or digest in exposed)
     if submitted:
         if choice is None or not session.strip():
             st.error('Choose a preference and provide an anonymous session ID.')

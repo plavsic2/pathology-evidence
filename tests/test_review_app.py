@@ -35,3 +35,19 @@ class ReviewAppTests(unittest.TestCase):
                     os.environ.pop('REVIEW_DB', None)
                 else:
                     os.environ['REVIEW_DB'] = old
+
+    def test_failure_page_empty_state(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            old = os.environ.get('REVIEW_BUNDLE_DIR')
+            os.environ['REVIEW_BUNDLE_DIR'] = tmp
+            try:
+                path = str(Path(__file__).resolve().parents[1] / 'app/pages/2_Failure_review.py')
+                app = AppTest.from_file(path).run(timeout=30)
+                self.assertFalse(app.exception)
+                self.assertTrue(app.info)
+                self.assertTrue(app.warning)
+            finally:
+                if old is None:
+                    os.environ.pop('REVIEW_BUNDLE_DIR', None)
+                else:
+                    os.environ['REVIEW_BUNDLE_DIR'] = old

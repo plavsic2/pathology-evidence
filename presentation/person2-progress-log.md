@@ -205,3 +205,21 @@ A Windows SQLite file-lock failure in the first unit-test run revealed unclosed 
 Limitations: automated interaction checks are not visual browser QA or clinical evaluation. No actual pathology images, expert reviews or real CONCH outputs have been evaluated. Blinding is a workflow aid, not security against source inspection/session resets. Reviewer sessions are self-reported identities. Saved response provenance must be checked against the shared manifest. Use a designated review host and persistent writable storage for the MVP.
 
 Still pending: true image assets, shared Delta path, real validation integration, failure-case browser, automated plots, expert feedback and final held-out evaluation. No clinical usefulness improvement is claimed.
+
+## October 17, 2026 — Failure inspection, provenance and presentation exports
+
+**Status: implemented on Person 2 branch; tested with mock and temporary abstract images; pending real artifact integration.**
+
+- Added investigator failure review with incorrect-prediction, missing-correct-candidate and identical-reference-set filters. Shows per-class overlap and descriptive classifier score gap.
+- Added manifest verification for IDs, query split, labels, gallery membership, cross-partition exact hashes and optional original-image hashing. Non-mock blinded review saving now requires a passing manifest check. Validation remains the development default.
+- Added a Person 2 adapter that calls the unchanged cached engine, exports both responses, copies original images with portable relative paths and includes a cached-manifest copy. Test export requires explicit final-test acknowledgement. Actual Delta execution of this adapter remains unverified.
+- Added self-contained investigator comparison HTML exports with embedded images and response fingerprints. Added a count dashboard that explicitly reports no findings when no non-mock reviews exist.
+- Extended protocol documentation. No backend, split configuration or shared manifest changed.
+
+Verification: 11 tests passed (9 logic/export/provenance tests and 2 Streamlit AppTest scenarios). A separate AppTest smoke check using temporary solid-color images verified saved-pair loading, successful review submission with a valid manifest, disabled submission after removing the manifest, and a populated investigator page without exceptions. These fixture images are not pathology data and are not committed as experimental findings.
+
+Visual QA: opened the local Streamlit preview in the browser and inspected the main comparison page, side-by-side fixture references and review controls. The investigator page was checked through AppTest; visual review with actual pathology images is still needed.
+
+Professional rationale: compare method outputs without quietly rewriting rankings; identify identical-output cases; require partition provenance before accepting real reviews; keep investigator evidence separate from blinded evaluation; preserve portable evidence and explicit negative findings.
+
+Remaining external dependencies: teammate's actual artifacts and authoritative manifest, shared storage path, agreed review sample, and domain reviewer feedback. No accuracy, preference or clinical benefit result is established. Presentation materials can now be exported from future real review records instead of fabricated examples.

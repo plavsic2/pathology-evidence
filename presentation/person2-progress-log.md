@@ -145,3 +145,17 @@ Do not add another model, whole-slide processing, automated morphology detection
 - Next action:
 
 Do not include secrets, API keys, identifying reviewer details or unapproved patient data.
+
+## October 17, 2026 — Organizer links checked
+
+**Status: Box guide reviewed; Slack messages not accessed.**
+
+Reviewed the [Box resource outline](https://uofi.app.box.com/s/vsl57eshv213e6gzcovj01umzt61wp69/file/2522592632731) in the browser. Box identifies it as updated October 12, 2026; its contents match the resource guide previously read from the ZIP.
+
+Confirmed: contrasting examples for education are an organizer-suggested application; judging covers innovation, development progress, clinical impact and communication; the guide specifies October 21 submission of an abstract, availability and a stand-alone presentation with no more than 20 main slides. Schedule changes are to be announced through Slack.
+
+The guide describes preloaded CONCH/MUSK resources but does not establish the current endpoint, credentials, service availability, team artifact path, or actual dataset counts.
+
+The supplied [Slack channel](https://app.slack.com/client/T0C8M0NR3J4/C0C7W9RKMSQ) redirected to workspace sign-in. No channel messages or current announcements were read. Slack integration was offered as an access option; connection remains unconfirmed.
+
+Decision: retain the agreed MVP and comparison evaluation. Do not change the backend schema, split or compute assumptions based on unread messages. Check current Slack announcements once access is available.

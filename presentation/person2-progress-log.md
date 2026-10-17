@@ -231,3 +231,11 @@ Remaining external dependencies: teammate's actual artifacts and authoritative m
 User requested a Swiss Knife or similar font and Catppuccin colors. Applied a local Helvetica Neue / Helvetica / Arial / sans-serif stack for a Swiss-style look, rather than bundling a commercial font. Added Catppuccin Mocha backgrounds, lavender accents, readable foregrounds, cyan focus outlines and shared styling for both comparison and investigator pages.
 
 Verification: both existing Streamlit interface behavior tests passed after styling. Visually inspected the comparison screen in the local browser and adjusted caption contrast. No backend logic, response schema, split, manifest or ranking behavior changed.
+
+## October 17, 2026 — Approved black-and-yellow palette
+
+**Status: implemented following user approval of the palette preview.**
+
+Replaced Catppuccin Mocha colors with warm black #101010, panels #191919, borders #343434, golden yellow #F5C518, hover/focus #FFDA47, text #F2F0E8 and secondary text #AAA79D. Kept the Swiss-style font stack and identical A/B panel treatments. Original tissue image colors are untouched. Backend, schema, splits and review behavior unchanged.
+
+Verification: Python styling source and TOML theme configuration parse. Browser preview checked. This is a presentation-only change; no new experiment results are implied.

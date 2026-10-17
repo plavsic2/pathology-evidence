@@ -1,0 +1,8 @@
+{
+  "classes": ["ADI", "BACK", "DEB", "LYM", "MUC", "MUS", "NORM", "STR", "TUM"],
+  "names": {
+    "ADI": "Adipose tissue", "BACK": "Background", "DEB": "Debris",
+    "LYM": "Lymphocytes", "MUC": "Mucus", "MUS": "Smooth muscle",
+    "NORM": "Normal colon mucosa", "STR": "Stroma", "TUM": "Colorectal adenocarcinoma epithelium"
+  }
+}

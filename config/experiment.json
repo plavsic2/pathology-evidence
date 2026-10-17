@@ -1,0 +1,11 @@
+{
+  "seed": 42,
+  "counts_per_class": {"train": 200, "val": 25, "gallery": 75, "test": 50},
+  "embedding_version": "conch_hosted_embed_l2_v1",
+  "classifier_C": 1.0,
+  "classifier_max_iter": 2000,
+  "top_classes": 3,
+  "references_per_class": 5,
+  "contrastive_alpha": 0.8,
+  "contrastive_beta": 0.2
+}

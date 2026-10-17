@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0",
+  "query": {"image_id": "MOCK_QUERY", "image_path": "", "ground_truth": "TUM"},
+  "model": {"encoder": "CONCH", "classifier": "logistic_regression", "embedding_version": "conch_hosted_embed_l2_v1"},
+  "method": "class_aware",
+  "predictions": [
+    {"class_id": "TUM", "rank": 1, "score": 0.74, "references": [{"image_id": "MOCK_TUM", "image_path": "", "class_id": "TUM", "similarity": 0.91, "discriminative_score": 0.68, "ranking_score": 0.91, "rank": 1}]},
+    {"class_id": "NORM", "rank": 2, "score": 0.18, "references": [{"image_id": "MOCK_NORM", "image_path": "", "class_id": "NORM", "similarity": 0.84, "discriminative_score": 0.35, "ranking_score": 0.84, "rank": 1}]},
+    {"class_id": "STR", "rank": 3, "score": 0.08, "references": [{"image_id": "MOCK_STR", "image_path": "", "class_id": "STR", "similarity": 0.72, "discriminative_score": 0.22, "ranking_score": 0.72, "rank": 1}]}
+  ],
+  "global_references": []
+}

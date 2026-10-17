@@ -1,0 +1,14 @@
+{
+  "notice": "General educational morphology descriptions only. NOT verified findings in any displayed tile.",
+  "attributes": {
+    "ADI": "Large clear lipid spaces with thin cytoplasmic rims; peripheral nuclei may be visible.",
+    "BACK": "Little or no tissue; may contain blank slide background or staining artifacts.",
+    "DEB": "Fragmented cellular or extracellular material without organized intact tissue architecture.",
+    "LYM": "Dense collections of small round cells with dark nuclei and relatively little cytoplasm.",
+    "MUC": "Pale extracellular mucin or mucus pools with sparse cellular structure.",
+    "MUS": "Bundles of elongated eosinophilic spindle-shaped smooth-muscle cells.",
+    "NORM": "Relatively regular colonic gland/crypt architecture with organized epithelium.",
+    "STR": "Connective-tissue matrix with stromal cells and variable collagenous background.",
+    "TUM": "Abnormal epithelial glandular architecture; may include crowded, irregular glands and cytologic atypia."
+  }
+}

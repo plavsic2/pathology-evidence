@@ -239,3 +239,27 @@ Verification: both existing Streamlit interface behavior tests passed after styl
 Replaced Catppuccin Mocha colors with warm black #101010, panels #191919, borders #343434, golden yellow #F5C518, hover/focus #FFDA47, text #F2F0E8 and secondary text #AAA79D. Kept the Swiss-style font stack and identical A/B panel treatments. Original tissue image colors are untouched. Backend, schema, splits and review behavior unchanged.
 
 Verification: Python styling source and TOML theme configuration parse. Browser preview checked. This is a presentation-only change; no new experiment results are implied.
+
+## October 17, 2026 — Reviewer onboarding and protocol package
+
+**Status: implemented and checked on Person 2 branch; no real reviewer outcomes claimed.**
+
+Delivered the additional scope requested:
+- Reviewer instructions with defined A/B, tie, neither and skip meanings. Abstract practice must be acknowledged and submitted before real review; readiness persists by anonymous session and instruction version.
+- Reference size controls applied equally to both sides, plus a selectable enlarged image inspector. No new image information is inferred.
+- Deterministic reviewer schedules, optional spaced repeat trials, separate original/repeat records, and method-normalized consistency checks. Repeat trials never inflate primary preference counts.
+- Progress counts for completed, skipped and unanswered trial instances. Investigator export can use the plan to report completion for sessions that have started. Nonstarters require a separate recruitment count.
+- Optional potentially-misleading-reference feedback mapped to method and explicitly treated as exploratory opinion.
+- Dedicated reviewer_app.py entrypoint registering only the review page; exploration/investigator navigation is absent. It is workflow separation, not account-level security.
+- A versioned protocol and non-overwriting frozen-plan utility. Default sampling is two thirds seeded random, remainder lower top-score-gap cases; cohorts are reported separately. Actual case-list freezing waits for real artifacts.
+- Formal reviewer mode verifies manifest identity, frozen response fingerprints and displayed original image hashes. Corrupt/missing images disable preferences and can be skipped when metadata is valid.
+- Presentation content scaffold and backup-demo checklist.
+- Review forms are keyed per trial so an earlier preference does not become a default on the next case.
+
+Verification: all 17 Person 2 tests passed, including a temporary-image end-to-end scenario covering practice, frozen sampling, successful skip tracking, corrupt-image blocking, preference reset on a new trial and detection of modified frozen responses. A browser inspection confirmed readable practice instructions, image controls, black/yellow styling and no investigator links in reviewer-only mode. Tests use abstract fixtures only.
+
+The first interface test after these changes caught a positional selector that no longer identified the source control; changed it to use its label and reran successfully. No clinical findings were inferred from test fixtures.
+
+Agreement check: no backend source, analyze_query() response schema, dataset split settings or shared split manifest changed. Streamlit's existing minimum dependency was raised from 1.32 to 1.36 because the dedicated reviewer entrypoint uses explicit page registration. No new runtime package was added.
+
+Remaining dependencies: actual artifacts, agreed shared directory, real frozen case list, domain feedback and final data evaluation. These additions provide the tools and protocol; they do not prove usefulness, diagnostic accuracy, patient independence or reduced harm.

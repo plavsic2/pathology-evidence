@@ -52,3 +52,16 @@ Person 2 can prepare saved pairs with python -m evaluation.prepare_review --limi
 Investigator exports now include review_dashboard.html, a standalone count display suitable for presentation preparation. Empty real-review data produces an explicit no-results message. The failure page can download a self-contained comparison HTML with embedded images and the exact response-pair fingerprint; it reveals methods and labels and must stay separate from blinded review.
 
 Remaining work: actual artifacts, clinician feedback, case-sampling agreement and final evaluation. No clinical outcome is claimed from these tools.
+
+
+## Version 1.1 reviewer workflow
+
+The implemented protocol is in evaluation-protocol.md; it supersedes the earlier MVP-only workflow descriptions above. Use streamlit run app/reviewer_app.py for reviewers and the original entrypoint for investigators. The reviewer entrypoint registers only the review page. Read instructions and submit a practice response in Demonstration before switching to real data, using the same anonymous session ID.
+
+Freeze a case list with python -m evaluation.review_plan after actual pairs and the agreed manifest exist. Set REVIEW_PLAN to the resulting JSON file, REVIEW_BUNDLE_DIR to the response folder and SPLIT_MANIFEST to the matching manifest. Formal reviewer-only saving requires that plan. Without it, investigator-mode reviews are labelled exploratory. Keep saved bundles immutable after freezing. The planner defaults to 30 original cases with seed 42, two thirds random and the rest lower score-gap cases. These cohorts must be reported separately. Planned repeated trials are excluded from main counts and compared by method preference.
+
+Reference image size affects both panels equally. Enlarged inspection supports query/reference selection without exposing paths or labels beyond the displayed candidate categories. Completion tracks saved, skipped and unanswered trial instances, not unique clinical cases. Export using python -m evaluation.export_review --db artifacts/reviews.sqlite3 --plan artifacts/review_plan.json --output results/review. Completion export covers started sessions only; people who never begin require a separate recruitment count.
+
+Review records now retain protocol hashes, trial IDs, repeat links, cohort, and an optional potentially-misleading-reference response. That response is exploratory opinion, not proof of harm. Legacy records remain readable. Different plans/protocols must be reported separately. See person2-judge-outline.md for presentation preparation.
+
+The dedicated reviewer entrypoint requires Streamlit 1.36 or newer for explicit page registration; requirements.txt reflects this minimum. It retains the existing framework and adds no new package. Reviewer-only mode checks original image hashes before accepting preferences. Use original exported files; missing, corrupted or converted files can be skipped but are not accepted as preference evidence.

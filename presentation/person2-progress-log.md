@@ -321,3 +321,14 @@ Remaining dependencies: actual artifacts, agreed shared directory, real frozen c
 - Verification: all 26 combined tests passed. Two new interface tests cover generated observations, empty supporting lists, per-candidate unavailable status, whole-call failure, missing-key handling, retained images, and no extra calls on zoom. The dedicated entrypoint was also tested after adding it. Browser preview uses real exported tissue images, with unavailable observations because this local process has no configured key. No live API call or domain verification of generated text is claimed.
 - Kept explanation exploration separate from the frozen reference-only blinded review. Evaluating generated observations would require a separate protocol/version; no existing reviewer records or cohort membership changed.
 - Preview on this PC: `http://127.0.0.1:8505`. Launch and joint smoke-test instructions: `presentation/visual-evidence-integration.md`. Person 1 reports five successful live backend queries; this remains his reported verification, distinct from local interface checks.
+
+### 11:29 a.m. — Authorized live explanation test completed
+
+**Status: live-service UI smoke test passed; domain accuracy/usefulness remains unevaluated.**
+
+- User explicitly authorized transmitting one selected validation query and its nine reference tiles to the Lumen service. Configured the supplied credential only in the running app process environment through hidden input, without source, disk, shell-history or GitHub storage of the value.
+- Ran one generation for saved validation Example 1 (`70eccc3f2e78b00d`), three candidates with three references each, using the backend's three sequential requests. All three candidates returned structured supporting/contrasting lists and rendered successfully in the real-image UI. No additional case generation or retries were initiated.
+- Opened the enlarged-image inspector and selected a reference after generation; existing observations remained displayed without regeneration. Partial/total-failure behavior was covered by the prior automated tests rather than deliberately causing more external calls.
+- Used local cached/exported images and remote hosted inference. No new Delta GPU allocation, embedding extraction or training job was started. Hosted-service quota accounting was not measured and is not claimed to be free.
+- Authenticated preview: `http://127.0.0.1:8506` while this local process runs. Credential and observations live in memory; no automatic explanation persistence is enabled. Generated observations are unverified and do not establish classifier reasoning, diagnosis, or usefulness.
+- Supersedes the earlier live-test-pending status for this single-case smoke test. Further testing should be deliberate and mindful of the team's stated ten-GPU-hour allocation.

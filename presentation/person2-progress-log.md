@@ -306,3 +306,18 @@ Remaining dependencies: actual artifacts, agreed shared directory, real frozen c
 - Dedicated reviewer interface runs at `http://127.0.0.1:8504` on this PC. Browser check confirmed real anonymous A/B panels and the practice-completion gate. No real review submissions were made by the agent. Investigator screen remains on port 8503.
 - Delta package `/u/plavsic2/person2-review-val-v1.zip`; extracted local folder `pathology-evidence-starter/artifacts/review_val_v1`. Images remain outside GitHub. Original manifest and shared cache untouched.
 - Remaining: invite domain reviewers through user/team coordination, collect voluntary feedback with roles/sample sizes, combine with Person 1's retrieval metrics, run final held-out evaluation after engineering choices freeze, and build final result figures/slides and rehearse. The frozen random tile subset does not establish patient independence or clinical validity.
+
+## 10/18/2026
+
+### 11:23 a.m. — Multi-candidate visual observations integrated
+
+**Status: implemented and tested; joint live-service smoke test pending host environment configuration.**
+
+- Incorporated Person 1 backend commit `8625bab733335ce5431b98c735b9172e85ffbf0e`, including `explanation_unavailable`, without changing the existing analyze_query contract, dataset split, rankings, or frozen review plan.
+- Added a visual-evidence exploration screen: query image, three candidate tissue categories, three references per candidate, supporting/contrasting observations, and an image enlargement inspector. The standalone entrypoint has no investigator navigation; the investigator app also has a Visual evidence page.
+- References remain visible when explanations fail; affected candidates show exactly 'Visual explanation temporarily unavailable'. Empty supporting lists are reported as empty rather than filled with invented positives. Image B/C/D labels preserve backend prompt order.
+- Main view hides model names, numeric scores, raw JSON, image IDs and dataset truth. Observations are marked machine-generated and unverified; research-only and non-diagnostic scope is explicit.
+- Generation requires an explicit button. Results persist per exact analysis in session memory, so image enlargement does not repeat API calls. No credential is hardcoded, written to source, or committed. The supplied credential was not reproduced in the log. Backend errors are sanitized in the UI.
+- Verification: all 26 combined tests passed. Two new interface tests cover generated observations, empty supporting lists, per-candidate unavailable status, whole-call failure, missing-key handling, retained images, and no extra calls on zoom. The dedicated entrypoint was also tested after adding it. Browser preview uses real exported tissue images, with unavailable observations because this local process has no configured key. No live API call or domain verification of generated text is claimed.
+- Kept explanation exploration separate from the frozen reference-only blinded review. Evaluating generated observations would require a separate protocol/version; no existing reviewer records or cohort membership changed.
+- Preview on this PC: `http://127.0.0.1:8505`. Launch and joint smoke-test instructions: `presentation/visual-evidence-integration.md`. Person 1 reports five successful live backend queries; this remains his reported verification, distinct from local interface checks.

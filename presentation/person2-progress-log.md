@@ -8,7 +8,7 @@ Started: October 17, 2026. Dates use America/Chicago.
 
 Record what we built, why we made decisions, what we learned, and the evidence supporting our presentation. Both teammates can read this log. This records work performed by the user with Codex assistance; it does not imply every implementation or test was performed manually by the user.
 
-Append an entry after each meaningful implementation, experiment, or scope decision during active project work. Do not silently rewrite previous conclusions: append corrections and link the relevant commit or result. Mark each item as completed, observed, planned, proposed, blocked, or superseded. A plan is not a result, and mock data is not pathology evidence. No background updates are implied.
+Append an entry after each meaningful implementation, experiment, or scope decision during active project work. Do not silently rewrite previous conclusions: append corrections and link the relevant commit or result. Mark each item as completed, observed, planned, proposed, blocked, or superseded. A plan is not a result, and mock data is not pathology evidence. No background updates are implied. Use one date heading per day and smaller time-stamped milestone headings underneath. Times use America/Chicago and refer to when updates were recorded or committed; the first three entries were recorded retrospectively at 3:50 p.m.
 
 ## Team boundaries and agreed decisions
 
@@ -19,58 +19,11 @@ Append an entry after each meaningful implementation, experiment, or scope decis
 | Dataset | Proposed 3,150 images: 1,800 train, 225 validation, 675 gallery, 450 test, provided sufficient usable data exists. | Establish a manageable prototype with distinct partition roles. |
 | Split manifest | Person 1 generates and commits it once; do not change it after embedding begins without discussion and rebuilding affected artifacts. | Preserve vector alignment and experimental comparability. |
 | Integration | Freeze analyze_query() and its JSON schema for the MVP; discuss changes together first. | Protect independent implementation and integration. |
-| Shared artifacts | One shared Delta directory for embeddings, classifier and results. Exact path still pending agreement. | Avoid inconsistent copies and duplicate computation. |
+| Shared artifacts | Agreed on October 17: `/work/nvme/bfqi/teams/team58/pathology-artifacts`. | Avoid inconsistent copies and duplicate computation. |
 | Scope | CONCH tissue-category comparison; no FPGA work. | Keep effort on the chosen workflow and evaluation. |
 | Evaluation | Tune on validation; reserve test for final evaluation. | Avoid selecting methods using final results. |
 
 See [COLLABORATION.md](../COLLABORATION.md) for the shared agreement.
-
-## October 17, 2026 — Scope and evaluation design
-
-**Status: completed planning; implementation pending.**
-
-We reviewed the proposal and technical contract and confirmed our role as Person 2. The intended contribution is to help users inspect competing tissue categories using labeled references, and evaluate whether comparative retrieval adds useful information.
-
-Decisions:
-- Develop against mock or saved backend responses instead of depending on live CONCH inference.
-- Preserve the backend contract and split configuration.
-- Compare class-aware nearest neighbors against contrastive reranking using the same queries, gallery, candidates and reference counts.
-- Separate embedding-based properties from expert judgments of usefulness.
-- Describe references as comparative examples, not proof of classifier reasoning.
-- Treat nine tissue categories as tissue categories, not nine clinical diagnoses.
-
-Why this matters for judges: the project has a testable question beyond classifier accuracy. The question is whether the retrieved examples are useful for comparison, including when the model is wrong.
-
-Evidence: the project discussion and imported starter source. No user study, expert preference finding, or performance improvement has been established.
-
-## October 17, 2026 — Shared repository established
-
-**Status: completed.**
-
-- Created the private repository under plavsic2.
-- Imported starter source without changing the analysis schema or split configuration.
-- Added the collaboration agreement.
-- Sent an invitation to SVYDYA123. It was pending acceptance when sent; acceptance has not been rechecked for this entry.
-- Excluded the ZIP's synthetic validation/test result files from the initial commit so they cannot be mistaken for actual pathology findings.
-
-Evidence: [starter import commit](https://github.com/plavsic2/pathology-evidence/commit/aab37217d128e5523a9769df668caa233e83a7cb).
-
-Verification performed: all 14 Python source files parsed successfully; the extracted JSON files parsed successfully.
-Verification not performed: automated runtime tests, actual CONCH endpoint calls, Delta integration, real-data evaluation. The local runtime lacked several project dependencies.
-
-## October 17, 2026 — Interface issues identified in source review
-
-**Status: observed; fixes pending.**
-
-| Finding | Consequence | Planned action |
-| --- | --- | --- |
-| Query picker displays the dataset label even with ground truth hidden. | A reviewer can see the answer before judging examples. | Remove labels from picker text in review mode. |
-| Mock response has empty image paths and fabricated scores. | Layout development is possible, but meaningful visual comparison is not. | Add clearly marked demonstration assets without presenting them as pathology results. |
-| Existing screen shows one named method at a time. | It does not support blinded comparison. | Add anonymous A/B panels with persisted randomization. |
-| Existing evaluation reports embedding similarity, margins and a diversity proxy. | These do not establish clinical usefulness; margins are optimized by reranking. | Add a separate reviewer protocol and response capture. |
-| Ground truth remains in the frozen backend response. | Hiding it requires care across all review surfaces, including raw JSON. | Keep it concealed in blinded UI; do not change schema unilaterally. |
-
-These findings came from reading code, not from a completed interactive application test.
 
 ## Ambition roadmap within Person 2 ownership
 
@@ -131,7 +84,9 @@ Do not add another model, whole-slide processing, automated morphology detection
 
 ## Template for future entries
 
-### YYYY-MM-DD — Milestone or decision
+For a new day, add `## MM/DD/YYYY` once. Under the current day, use:
+
+### h:mm a.m./p.m. — Milestone or decision
 
 - Status:
 - Work completed:
@@ -146,7 +101,56 @@ Do not add another model, whole-slide processing, automated morphology detection
 
 Do not include secrets, API keys, identifying reviewer details or unapproved patient data.
 
-## October 17, 2026 — Organizer links checked
+## 10/17/2026
+
+### 3:50 p.m. — Scope and evaluation design
+
+**Status: completed planning; implementation pending.**
+
+We reviewed the proposal and technical contract and confirmed our role as Person 2. The intended contribution is to help users inspect competing tissue categories using labeled references, and evaluate whether comparative retrieval adds useful information.
+
+Decisions:
+- Develop against mock or saved backend responses instead of depending on live CONCH inference.
+- Preserve the backend contract and split configuration.
+- Compare class-aware nearest neighbors against contrastive reranking using the same queries, gallery, candidates and reference counts.
+- Separate embedding-based properties from expert judgments of usefulness.
+- Describe references as comparative examples, not proof of classifier reasoning.
+- Treat nine tissue categories as tissue categories, not nine clinical diagnoses.
+
+Why this matters for judges: the project has a testable question beyond classifier accuracy. The question is whether the retrieved examples are useful for comparison, including when the model is wrong.
+
+Evidence: the project discussion and imported starter source. No user study, expert preference finding, or performance improvement has been established.
+
+### 3:50 p.m. — Shared repository established
+
+**Status: completed.**
+
+- Created the private repository under plavsic2.
+- Imported starter source without changing the analysis schema or split configuration.
+- Added the collaboration agreement.
+- Sent an invitation to SVYDYA123. It was pending acceptance when sent; acceptance has not been rechecked for this entry.
+- Excluded the ZIP's synthetic validation/test result files from the initial commit so they cannot be mistaken for actual pathology findings.
+
+Evidence: [starter import commit](https://github.com/plavsic2/pathology-evidence/commit/aab37217d128e5523a9769df668caa233e83a7cb).
+
+Verification performed: all 14 Python source files parsed successfully; the extracted JSON files parsed successfully.
+Verification not performed: automated runtime tests, actual CONCH endpoint calls, Delta integration, real-data evaluation. The local runtime lacked several project dependencies.
+
+### 3:50 p.m. — Interface issues identified in source review
+
+**Status: observed; fixes pending.**
+
+| Finding | Consequence | Planned action |
+| --- | --- | --- |
+| Query picker displays the dataset label even with ground truth hidden. | A reviewer can see the answer before judging examples. | Remove labels from picker text in review mode. |
+| Mock response has empty image paths and fabricated scores. | Layout development is possible, but meaningful visual comparison is not. | Add clearly marked demonstration assets without presenting them as pathology results. |
+| Existing screen shows one named method at a time. | It does not support blinded comparison. | Add anonymous A/B panels with persisted randomization. |
+| Existing evaluation reports embedding similarity, margins and a diversity proxy. | These do not establish clinical usefulness; margins are optimized by reranking. | Add a separate reviewer protocol and response capture. |
+| Ground truth remains in the frozen backend response. | Hiding it requires care across all review surfaces, including raw JSON. | Keep it concealed in blinded UI; do not change schema unilaterally. |
+
+These findings came from reading code, not from a completed interactive application test.
+
+### 3:54 p.m. — Organizer links checked
 
 **Status: Box guide reviewed; Slack messages not accessed.**
 
@@ -160,7 +164,7 @@ The supplied [Slack channel](https://app.slack.com/client/T0C8M0NR3J4/C0C7W9RKMS
 
 Decision: retain the agreed MVP and comparison evaluation. Do not change the backend schema, split or compute assumptions based on unread messages. Check current Slack announcements once access is available.
 
-## October 17, 2026 — Slack access established and compute guidance reviewed
+### 3:55 p.m. — Slack access established and compute guidance reviewed
 
 **Status: completed read-only review; no cluster access or implementation claimed.**
 
@@ -179,3 +183,164 @@ Verified organizer announcements:
 Sources: [hosted models announcement](https://app.slack.com/archives/C0C7W9RKMSQ/p1792241751791109), [storage guidance](https://app.slack.com/archives/C0C7W9RKMSQ/p1792244622730939), [technical channel](https://app.slack.com/client/T0C8M0NR3J4/C0C7SRT9QJ2).
 
 Decision: prioritize cached/offline compatibility and continue Person 2 development with mocks while Person 1 establishes real artifacts. No schema or split changes. Credentials seen in Slack are intentionally not reproduced in the log or repository.
+
+### 4:05 p.m. — Person 2 blinded review MVP implemented
+
+**Status: implemented and locally tested on person2/blinded-review; pending merge and real-data integration.**
+
+Delivered:
+- Replaced the development screen with an independent comparison workflow: abstract mock fixtures, saved response pairs, and lazy loading of the cached backend.
+- Removed answer-bearing query labels from selection, and removed source IDs, filenames, raw JSON, scores and method names from blinded displays.
+- Sorted candidate categories alphabetically to avoid revealing classifier rank.
+- Added deterministic per-session A/B assignment, anonymous role capture, tie/neither responses and optional comments.
+- Added SQLite persistence keyed by reviewer session and exact response-pair SHA-256. Re-submission replaces a prior response instead of double counting it.
+- Disabled submission when required images are missing or a case has been unblinded in that browser session.
+- Added investigator-only CSV, summary JSON and Markdown count-table export. Mock responses are excluded; spreadsheet formula text in comments is escaped.
+- Added pair-comparability validation and a review protocol guide.
+
+Agreement check: no src/ backend files, analyze_query() schema, split settings, or manifest changed. The two-response saved bundle is a Person 2 wrapper around unchanged backend results. No Delta SSH access needed for development.
+
+Professional decisions: use Streamlit's AppTest to verify interaction behavior rather than relying only on screenshots; use standard-library SQLite for durable, duplicate-resistant records; record exact input fingerprints for traceability; avoid confidence claims from ranking-score improvement.
+
+Verification: 4 review-logic unit tests and 1 Streamlit AppTest scenario passed (5 total). AppTest covered mock rendering, no truth checkbox/raw JSON in initial blinded mode, successful tie submission, blocking previously exposed cases, and empty saved-bundle handling. A separate smoke check verified investigator export, mock exclusion and spreadsheet formula escaping. A missing cached engine was also checked without an application crash. Changed Python files parse successfully.
+
+A Windows SQLite file-lock failure in the first unit-test run revealed unclosed database connections. Explicit connection closing fixed it; the tests were rerun successfully. A test script path was also corrected before the final successful run.
+
+Limitations: automated interaction checks are not visual browser QA or clinical evaluation. No actual pathology images, expert reviews or real CONCH outputs have been evaluated. Blinding is a workflow aid, not security against source inspection/session resets. Reviewer sessions are self-reported identities. Saved response provenance must be checked against the shared manifest. Use a designated review host and persistent writable storage for the MVP.
+
+Still pending: true image assets, shared Delta path, real validation integration, failure-case browser, automated plots, expert feedback and final held-out evaluation. No clinical usefulness improvement is claimed.
+
+### 4:16 p.m. — Failure inspection, provenance and presentation exports
+
+**Status: implemented on Person 2 branch; tested with mock and temporary abstract images; pending real artifact integration.**
+
+- Added investigator failure review with incorrect-prediction, missing-correct-candidate and identical-reference-set filters. Shows per-class overlap and descriptive classifier score gap.
+- Added manifest verification for IDs, query split, labels, gallery membership, cross-partition exact hashes and optional original-image hashing. Non-mock blinded review saving now requires a passing manifest check. Validation remains the development default.
+- Added a Person 2 adapter that calls the unchanged cached engine, exports both responses, copies original images with portable relative paths and includes a cached-manifest copy. Test export requires explicit final-test acknowledgement. Actual Delta execution of this adapter remains unverified.
+- Added self-contained investigator comparison HTML exports with embedded images and response fingerprints. Added a count dashboard that explicitly reports no findings when no non-mock reviews exist.
+- Extended protocol documentation. No backend, split configuration or shared manifest changed.
+
+Verification: 11 tests passed (9 logic/export/provenance tests and 2 Streamlit AppTest scenarios). A separate AppTest smoke check using temporary solid-color images verified saved-pair loading, successful review submission with a valid manifest, disabled submission after removing the manifest, and a populated investigator page without exceptions. These fixture images are not pathology data and are not committed as experimental findings.
+
+Visual QA: opened the local Streamlit preview in the browser and inspected the main comparison page, side-by-side fixture references and review controls. The investigator page was checked through AppTest; visual review with actual pathology images is still needed.
+
+Professional rationale: compare method outputs without quietly rewriting rankings; identify identical-output cases; require partition provenance before accepting real reviews; keep investigator evidence separate from blinded evaluation; preserve portable evidence and explicit negative findings.
+
+Remaining external dependencies: teammate's actual artifacts and authoritative manifest, shared storage path, agreed review sample, and domain reviewer feedback. No accuracy, preference or clinical benefit result is established. Presentation materials can now be exported from future real review records instead of fabricated examples.
+
+### 4:20 p.m. — Swiss-style typography and Catppuccin Mocha theme
+
+**Status: implemented on Person 2 branch and visually checked.**
+
+User requested a Swiss Knife or similar font and Catppuccin colors. Applied a local Helvetica Neue / Helvetica / Arial / sans-serif stack for a Swiss-style look, rather than bundling a commercial font. Added Catppuccin Mocha backgrounds, lavender accents, readable foregrounds, cyan focus outlines and shared styling for both comparison and investigator pages.
+
+Verification: both existing Streamlit interface behavior tests passed after styling. Visually inspected the comparison screen in the local browser and adjusted caption contrast. No backend logic, response schema, split, manifest or ranking behavior changed.
+
+### 4:23 p.m. — Approved black-and-yellow palette
+
+**Status: implemented following user approval of the palette preview.**
+
+Replaced Catppuccin Mocha colors with warm black #101010, panels #191919, borders #343434, golden yellow #F5C518, hover/focus #FFDA47, text #F2F0E8 and secondary text #AAA79D. Kept the Swiss-style font stack and identical A/B panel treatments. Original tissue image colors are untouched. Backend, schema, splits and review behavior unchanged.
+
+Verification: Python styling source and TOML theme configuration parse. Browser preview checked. This is a presentation-only change; no new experiment results are implied.
+
+### 4:37 p.m. — Reviewer onboarding and protocol package
+
+**Status: implemented and checked on Person 2 branch; no real reviewer outcomes claimed.**
+
+Delivered the additional scope requested:
+- Reviewer instructions with defined A/B, tie, neither and skip meanings. Abstract practice must be acknowledged and submitted before real review; readiness persists by anonymous session and instruction version.
+- Reference size controls applied equally to both sides, plus a selectable enlarged image inspector. No new image information is inferred.
+- Deterministic reviewer schedules, optional spaced repeat trials, separate original/repeat records, and method-normalized consistency checks. Repeat trials never inflate primary preference counts.
+- Progress counts for completed, skipped and unanswered trial instances. Investigator export can use the plan to report completion for sessions that have started. Nonstarters require a separate recruitment count.
+- Optional potentially-misleading-reference feedback mapped to method and explicitly treated as exploratory opinion.
+- Dedicated reviewer_app.py entrypoint registering only the review page; exploration/investigator navigation is absent. It is workflow separation, not account-level security.
+- A versioned protocol and non-overwriting frozen-plan utility. Default sampling is two thirds seeded random, remainder lower top-score-gap cases; cohorts are reported separately. Actual case-list freezing waits for real artifacts.
+- Formal reviewer mode verifies manifest identity, frozen response fingerprints and displayed original image hashes. Corrupt/missing images disable preferences and can be skipped when metadata is valid.
+- Presentation content scaffold and backup-demo checklist.
+- Review forms are keyed per trial so an earlier preference does not become a default on the next case.
+
+Verification: all 17 Person 2 tests passed, including a temporary-image end-to-end scenario covering practice, frozen sampling, successful skip tracking, corrupt-image blocking, preference reset on a new trial and detection of modified frozen responses. A browser inspection confirmed readable practice instructions, image controls, black/yellow styling and no investigator links in reviewer-only mode. Tests use abstract fixtures only.
+
+The first interface test after these changes caught a positional selector that no longer identified the source control; changed it to use its label and reran successfully. No clinical findings were inferred from test fixtures.
+
+Agreement check: no backend source, analyze_query() response schema, dataset split settings or shared split manifest changed. Streamlit's existing minimum dependency was raised from 1.32 to 1.36 because the dedicated reviewer entrypoint uses explicit page registration. No new runtime package was added.
+
+Remaining dependencies: actual artifacts, agreed shared directory, real frozen case list, domain feedback and final data evaluation. These additions provide the tools and protocol; they do not prove usefulness, diagnostic accuracy, patient independence or reduced harm.
+
+### 6:28 p.m. — Partner backend integration and targeted failure inspection
+
+**Status: implemented and locally tested; real Delta/image execution pending.**
+
+- Verification: all 23 combined tests passed, including synthetic backend contract tests, validation-manifest checks, and an AppTest proving the investigator view calls both existing retrieval methods for the selected priority query. These tests do not inspect real tissue references.
+- Agreed `ARTIFACT_DIR`: `/work/nvme/bfqi/teams/team58/pathology-artifacts`.
+- Incorporated Person 1 commit `a08ccc6ccac0cb883e9dc5f796411575ed9182bc` and its 3,150-row split manifest unchanged; backend schema and implementation remain unchanged.
+- Partner reports completed embeddings, trained classifier, and three retrieval methods passing integration checks. Independently checked committed validation table: 215/225 correct (95.56%); all four requested cases belong to validation. This verifies the table, not a rerun on cached embeddings.
+- Added cached-engine investigator review for the four priority cases, named side-by-side methods, aligned class ordering, candidate-omission warning, and portable targeted export with explicit query selection and overwrite protection.
+- Ambition: inspect whether reranking reinforces errors, including high-score errors and missing true candidates. Handpicked cases remain exploratory, separate from the representative blinded cohort.
+- Real image/reference inspection is pending Delta access or a portable export. No tissue images or classifier cache are available on this workstation. Launch/export steps: `presentation/delta-integration.md`.
+
+
+### 8:49 p.m. — Real Delta integration and portable image verification
+
+**Status: completed technical integration; reference usefulness evaluation pending.**
+
+- Accessed Delta using the user's authenticated Open OnDemand session. Deployed a source snapshot in `/u/plavsic2/pathology-evidence-person2` and isolated environment `/u/plavsic2/pathology-person2-venv`; GitHub checkout required separate credentials, so source was uploaded without transferring credentials.
+- Read the shared team58 cache. Its metadata reports 512-dimensional L2-normalized CONCH embeddings, 1,800 training examples and 225 validation examples. The committed split manifest matched the embedding manifest with `cmp`.
+- Ran the real cached integration checks on CPU compute node cn004, Slurm job 22961221: nearest, class_aware and contrastive all passed. Exported the four priority validation query pairs and original image files without changing shared artifacts, splits, weights or schema.
+- Downloaded the portable bundle to the local workstation and verified query/reference IDs, gallery labels, partitions and original SHA-256 image hashes for all four pairs: all passed. AppTest opened each real case without application errors or missing-image warnings. An initial smoke-check image counter used the wrong element name; corrected the check and reran successfully.
+- Visually checked real class-aware/contrastive tissue panels in the local black/yellow interface. Local preview: `http://127.0.0.1:8503/Failure_review` while the local server is running. Local screenshot: `person2-real-validation.png` (not committed as dataset material).
+- Observed in exported responses: MUC case `11a3e8d3096d83e8` omits MUC from its top-three candidates. The MUS case includes MUS in third position. All four pairs change at least some reference membership; this does not establish greater usefulness.
+- Delta bundle: `/u/plavsic2/person2-priority-validation.zip`. Local bundle directory: `pathology-evidence-starter/artifacts/priority_validation`. Tissue images, model files and review databases remain outside GitHub source commits.
+- Remaining: representative frozen review sample, independent domain feedback, retrieval evaluation owned by Person 1, final held-out evaluation after choices freeze, results figures and final presentation/rehearsal. No preference or clinical benefit result is claimed.
+
+### 8:55 p.m. — Validation review sample frozen and reviewer session ready
+
+**Status: completed preparation; recruitment and usefulness outcomes pending.**
+
+- Prepared metadata pairs from the full 225-query validation pool using the unchanged cached engine on Delta CPU job 22965112, cn004. No test queries, new embeddings, classifier changes or ranking changes.
+- Applied protocol v1.1 with seed 42: 20 random cases plus 10 additional smallest-score-gap cases, reported as separate cohorts. Added two scheduled repeats for 32 trials. Selection was not based on reviewer preferences; do not replace unfavorable cases.
+- Frozen plan fingerprint: `e1f07276281b9f13da84c66d097044e042bd7c54eadeb2c718be4943c388916d`. Plan metadata is versioned in `presentation/review-val-v1-plan.json`.
+- Copied 389 unique original image files. All 30 response fingerprints and query/gallery image hashes passed verification after download. Immutable directory creation prevents silently overwriting this cohort.
+- Added a tested full-pool preparation utility and reviewer-session checklist. All 24 combined automated tests passed. The application ignores the plan metadata JSON when enumerating response pairs.
+- Dedicated reviewer interface runs at `http://127.0.0.1:8504` on this PC. Browser check confirmed real anonymous A/B panels and the practice-completion gate. No real review submissions were made by the agent. Investigator screen remains on port 8503.
+- Delta package `/u/plavsic2/person2-review-val-v1.zip`; extracted local folder `pathology-evidence-starter/artifacts/review_val_v1`. Images remain outside GitHub. Original manifest and shared cache untouched.
+- Remaining: invite domain reviewers through user/team coordination, collect voluntary feedback with roles/sample sizes, combine with Person 1's retrieval metrics, run final held-out evaluation after engineering choices freeze, and build final result figures/slides and rehearse. The frozen random tile subset does not establish patient independence or clinical validity.
+
+## 10/18/2026
+
+### 11:23 a.m. — Multi-candidate visual observations integrated
+
+**Status: implemented and tested; joint live-service smoke test pending host environment configuration.**
+
+- Incorporated Person 1 backend commit `8625bab733335ce5431b98c735b9172e85ffbf0e`, including `explanation_unavailable`, without changing the existing analyze_query contract, dataset split, rankings, or frozen review plan.
+- Added a visual-evidence exploration screen: query image, three candidate tissue categories, three references per candidate, supporting/contrasting observations, and an image enlargement inspector. The standalone entrypoint has no investigator navigation; the investigator app also has a Visual evidence page.
+- References remain visible when explanations fail; affected candidates show exactly 'Visual explanation temporarily unavailable'. Empty supporting lists are reported as empty rather than filled with invented positives. Image B/C/D labels preserve backend prompt order.
+- Main view hides model names, numeric scores, raw JSON, image IDs and dataset truth. Observations are marked machine-generated and unverified; research-only and non-diagnostic scope is explicit.
+- Generation requires an explicit button. Results persist per exact analysis in session memory, so image enlargement does not repeat API calls. No credential is hardcoded, written to source, or committed. The supplied credential was not reproduced in the log. Backend errors are sanitized in the UI.
+- Verification: all 26 combined tests passed. Two new interface tests cover generated observations, empty supporting lists, per-candidate unavailable status, whole-call failure, missing-key handling, retained images, and no extra calls on zoom. The dedicated entrypoint was also tested after adding it. Browser preview uses real exported tissue images, with unavailable observations because this local process has no configured key. No live API call or domain verification of generated text is claimed.
+- Kept explanation exploration separate from the frozen reference-only blinded review. Evaluating generated observations would require a separate protocol/version; no existing reviewer records or cohort membership changed.
+- Preview on this PC: `http://127.0.0.1:8505`. Launch and joint smoke-test instructions: `presentation/visual-evidence-integration.md`. Person 1 reports five successful live backend queries; this remains his reported verification, distinct from local interface checks.
+
+### 11:29 a.m. — Authorized live explanation test completed
+
+**Status: live-service UI smoke test passed; domain accuracy/usefulness remains unevaluated.**
+
+- User explicitly authorized transmitting one selected validation query and its nine reference tiles to the Lumen service. Configured the supplied credential only in the running app process environment through hidden input, without source, disk, shell-history or GitHub storage of the value.
+- Ran one generation for saved validation Example 1 (`70eccc3f2e78b00d`), three candidates with three references each, using the backend's three sequential requests. All three candidates returned structured supporting/contrasting lists and rendered successfully in the real-image UI. No additional case generation or retries were initiated.
+- Opened the enlarged-image inspector and selected a reference after generation; existing observations remained displayed without regeneration. Partial/total-failure behavior was covered by the prior automated tests rather than deliberately causing more external calls.
+- Used local cached/exported images and remote hosted inference. No new Delta GPU allocation, embedding extraction or training job was started. Hosted-service quota accounting was not measured and is not claimed to be free.
+- Authenticated preview: `http://127.0.0.1:8506` while this local process runs. Credential and observations live in memory; no automatic explanation persistence is enabled. Generated observations are unverified and do not establish classifier reasoning, diagnosis, or usefulness.
+- Supersedes the earlier live-test-pending status for this single-case smoke test. Further testing should be deliberate and mindful of the team's stated ten-GPU-hour allocation.
+
+### 12:40 p.m. — Query visibility, inline enlargement and readable observations
+
+**Status: implemented and checked; no new inference requests.**
+
+- Read teammate-supplied UI feedback. Kept the query visible in a desktop sidebar and added a compact sticky query on narrow screens. Browser geometry verified its top stayed onscreen after scrolling through evidence. Narrow layouts do not require an open sidebar overlay to retain the query.
+- Added Enlarge Image B/C/D beside each thumbnail. The dialog includes both query and selected reference; warns that enlargement adds no underlying image detail.
+- Converted observation sentences into bullets with bold query/reference labels while retaining generated wording. Arbitrary Markdown syntax from generated text is escaped. No validity claim added.
+- Clarified there is no upload function: the current backend consumes existing validation image IDs. Did not add a nonfunctional arbitrary-image uploader or change the agreed backend API.
+- Added explicit local observation saving and exact-analysis-bound replay to avoid repeat inference during demos. Recovered the exact earlier live smoke-test wording from its browser output after the code rerun cleared the in-memory result; labeled as a saved, unverified copy. No additional Lumen calls, GPU jobs, training or embeddings were generated.
+- Verification: 26 combined tests passed after query/enlargement changes. Then extended the two evidence tests for bold labels, explicit save/replay, retained images and no repeat API calls; both passed. Browser checked pinned query and enlarged real images. Streamlit minimum raised to 1.40 for supported UI containers/dialogs.
+- Source is on the existing Person 2 branch/PR. Saved image/text artifacts remain local and outside GitHub; frozen review sample, backend schema and shared artifacts unchanged.

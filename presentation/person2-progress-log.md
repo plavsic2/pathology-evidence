@@ -280,3 +280,16 @@ Remaining dependencies: actual artifacts, agreed shared directory, real frozen c
 - Ambition: inspect whether reranking reinforces errors, including high-score errors and missing true candidates. Handpicked cases remain exploratory, separate from the representative blinded cohort.
 - Real image/reference inspection is pending Delta access or a portable export. No tissue images or classifier cache are available on this workstation. Launch/export steps: `presentation/delta-integration.md`.
 
+
+### 8:49 p.m. — Real Delta integration and portable image verification
+
+**Status: completed technical integration; reference usefulness evaluation pending.**
+
+- Accessed Delta using the user's authenticated Open OnDemand session. Deployed a source snapshot in `/u/plavsic2/pathology-evidence-person2` and isolated environment `/u/plavsic2/pathology-person2-venv`; GitHub checkout required separate credentials, so source was uploaded without transferring credentials.
+- Read the shared team58 cache. Its metadata reports 512-dimensional L2-normalized CONCH embeddings, 1,800 training examples and 225 validation examples. The committed split manifest matched the embedding manifest with `cmp`.
+- Ran the real cached integration checks on CPU compute node cn004, Slurm job 22961221: nearest, class_aware and contrastive all passed. Exported the four priority validation query pairs and original image files without changing shared artifacts, splits, weights or schema.
+- Downloaded the portable bundle to the local workstation and verified query/reference IDs, gallery labels, partitions and original SHA-256 image hashes for all four pairs: all passed. AppTest opened each real case without application errors or missing-image warnings. An initial smoke-check image counter used the wrong element name; corrected the check and reran successfully.
+- Visually checked real class-aware/contrastive tissue panels in the local black/yellow interface. Local preview: `http://127.0.0.1:8503/Failure_review` while the local server is running. Local screenshot: `person2-real-validation.png` (not committed as dataset material).
+- Observed in exported responses: MUC case `11a3e8d3096d83e8` omits MUC from its top-three candidates. The MUS case includes MUS in third position. All four pairs change at least some reference membership; this does not establish greater usefulness.
+- Delta bundle: `/u/plavsic2/person2-priority-validation.zip`. Local bundle directory: `pathology-evidence-starter/artifacts/priority_validation`. Tissue images, model files and review databases remain outside GitHub source commits.
+- Remaining: representative frozen review sample, independent domain feedback, retrieval evaluation owned by Person 1, final held-out evaluation after choices freeze, results figures and final presentation/rehearsal. No preference or clinical benefit result is claimed.

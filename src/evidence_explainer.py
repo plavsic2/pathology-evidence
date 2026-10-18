@@ -247,25 +247,36 @@ def explain_candidates(analysis, api_key=None, max_refs=3):
             },
         )
 
-        with urllib.request.urlopen(
-            request, timeout=120
-        ) as response:
-            output = json.load(response)
+        explanation_unavailable = False
+        try:
+            with urllib.request.urlopen(
+                request, timeout=45
+            ) as response:
+                output = json.load(response)
 
-        raw = output["choices"][0]["message"]["content"].strip()
+            raw = output["choices"][0]["message"]["content"].strip()
 
-        # Handle JSON optionally enclosed in markdown fences.
-        if raw.startswith("```"):
-            raw = raw.split("\n", 1)[1].rsplit("```", 1)[0].strip()
+            # Handle JSON optionally enclosed in markdown fences.
+            if raw.startswith("```"):
+                raw = raw.split("\n", 1)[1].rsplit("```", 1)[0].strip()
 
-        evidence = json.loads(raw)
+            evidence = json.loads(raw)
 
-        if not all(
-            isinstance(evidence.get(field), list)
-            and all(isinstance(item, str) for item in evidence[field])
-            for field in ("supporting", "contrasting")
-        ):
-            raise ValueError("Unexpected evidence response structure")
+            if not all(
+                isinstance(evidence.get(field), list)
+                and all(isinstance(item, str) for item in evidence[field])
+                for field in ("supporting", "contrasting")
+            ):
+                raise ValueError("Unexpected evidence response structure")
+
+        except (OSError, ValueError, KeyError, IndexError, TypeError, AttributeError) as exc:
+            print(
+                f"Evidence unavailable for {prediction['class_id']}: "
+                f"{type(exc).__name__}: {exc}",
+                flush=True,
+            )
+            evidence = {'supporting': [], 'contrasting': []}
+            explanation_unavailable = True
 
         candidates.append({
             "class_id": prediction["class_id"],
@@ -278,6 +289,7 @@ def explain_candidates(analysis, api_key=None, max_refs=3):
             ],
             "supporting": evidence["supporting"],
             "contrasting": evidence["contrasting"],
+            "explanation_unavailable": explanation_unavailable,
         })
 
     return {

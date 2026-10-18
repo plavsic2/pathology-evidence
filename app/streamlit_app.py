@@ -47,7 +47,7 @@ if mock:
     st.warning('DEMONSTRATION: abstract fixtures and fabricated scores. Both methods have identical references. No pathology findings.')
 elif source == 'Saved response pairs':
     folder = Path(os.environ.get('REVIEW_BUNDLE_DIR', str(ROOT / 'artifacts/review_bundles')))
-    paths = sorted(folder.glob('*.json')) if folder.is_dir() else []
+    paths = sorted(p for p in folder.glob('*.json') if p.name != 'review_plan.json') if folder.is_dir() else []
     if not paths:
         st.info('No saved pairs found. See presentation/person2-review-guide.md.')
         st.stop()

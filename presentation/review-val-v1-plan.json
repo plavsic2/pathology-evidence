@@ -1,0 +1,163 @@
+{
+  "protocol_version": "1.1",
+  "seed": 42,
+  "split": "val",
+  "manifest_sha256": "caa73e8db16d800aee32395789a506fb1434f8e1fefa1c1a37b6ba9edfdea0d4",
+  "pool_size": 225,
+  "requested_count": 30,
+  "selection": "Two thirds seeded random; remaining lowest classifier top-score gaps among unselected cases. Difficult cohort is secondary.",
+  "repeat_count": 2,
+  "cases": [
+    {
+      "file": "case_0123.json",
+      "bundle_sha256": "d43cf79d0b86d24977b47f39c418a05e136a1b366b37b48fe28f0096fabfd7e4",
+      "cohort": "random"
+    },
+    {
+      "file": "case_0196.json",
+      "bundle_sha256": "b32d71711ec1c47f149ad154401dbb823774e53a753de7473594003644b4dd98",
+      "cohort": "random"
+    },
+    {
+      "file": "case_0003.json",
+      "bundle_sha256": "9f60b4084cd4846b2f6eaf6fd9471ad746c4341b82e18fb786e0a89f28a2be36",
+      "cohort": "random"
+    },
+    {
+      "file": "case_0169.json",
+      "bundle_sha256": "059ad1756613996158c67d8aec3d2129147ce23f84a03cc95ed3dab8999900c8",
+      "cohort": "random"
+    },
+    {
+      "file": "case_0046.json",
+      "bundle_sha256": "cb1a4888f0c27ac7480a27533a616244c9e107dd2775d8a3f28370a9c8b0b338",
+      "cohort": "random"
+    },
+    {
+      "file": "case_0031.json",
+      "bundle_sha256": "6dadc32899cfd9fcca27310566c6b49f9a75ae978f583667ce5ada14f49c9dfe",
+      "cohort": "random"
+    },
+    {
+      "file": "case_0048.json",
+      "bundle_sha256": "52e2ad57bd0cdf9fce6e0cd0377b9323bc8d18703949ed1081353385e26e0ac4",
+      "cohort": "random"
+    },
+    {
+      "file": "case_0181.json",
+      "bundle_sha256": "caf82841ce4ff2d664914dc7b82fafa3698fcb51002f4bbe64a066960694bc66",
+      "cohort": "random"
+    },
+    {
+      "file": "case_0178.json",
+      "bundle_sha256": "28e2d27468efdf6e78a9e92f364d17162d45ac91a05b58b82f26b99c74ab02f1",
+      "cohort": "random"
+    },
+    {
+      "file": "case_0101.json",
+      "bundle_sha256": "0cd5371ca1445d386c75b9e2760a89990766a5ef2c7ec02228aafae6ed1acd97",
+      "cohort": "random"
+    },
+    {
+      "file": "case_0100.json",
+      "bundle_sha256": "86b6921364ec8bb9431c2ff4566520b58dde0933faa100ec12f9d20d5c0577ee",
+      "cohort": "random"
+    },
+    {
+      "file": "case_0074.json",
+      "bundle_sha256": "83ac3d700706306fe1ff6db001980ce199810b3ce3f739ab71ff03dd340fc127",
+      "cohort": "random"
+    },
+    {
+      "file": "case_0043.json",
+      "bundle_sha256": "0a6ceea1dc71ac3211e312d934a9fd5844907324f01be15b1b816e7cb5c692cb",
+      "cohort": "random"
+    },
+    {
+      "file": "case_0154.json",
+      "bundle_sha256": "69a3987bf7ddefdf4494c37fba07e110ff44a406ae8c4e5f1099db88ee40c8c7",
+      "cohort": "random"
+    },
+    {
+      "file": "case_0099.json",
+      "bundle_sha256": "dfb2be5aa4d0c36ed2df95faf441fb4964be8a2a78be85b165f1ffa1177e6c71",
+      "cohort": "random"
+    },
+    {
+      "file": "case_0124.json",
+      "bundle_sha256": "13e0c2ece7d37f4512b7f2f87ab3fddeaf3bdd90d84ba9a295a446e4b729499c",
+      "cohort": "random"
+    },
+    {
+      "file": "case_0162.json",
+      "bundle_sha256": "3b6f58303d9749808f65f19188f1fbd74b0d52f4f8f1ee0bf5f2212642967d14",
+      "cohort": "random"
+    },
+    {
+      "file": "case_0141.json",
+      "bundle_sha256": "b22c871e36ee80b9fefa02c67d17cf2096b054768f6ae1f676c27b44d82689cf",
+      "cohort": "random"
+    },
+    {
+      "file": "case_0176.json",
+      "bundle_sha256": "6169f873c0a07bce5123f9eac8b3f86b70f1bc2efacc7f9157337efda9654bbb",
+      "cohort": "random"
+    },
+    {
+      "file": "case_0030.json",
+      "bundle_sha256": "d52d79c8c6556e3d495541f37dda988b4e335d603bb83d482966be879cf05728",
+      "cohort": "random"
+    },
+    {
+      "file": "case_0106.json",
+      "bundle_sha256": "57d141c7734107a07e4fbefc7159afc65759744cdb61d2256223c94427573be5",
+      "cohort": "difficult"
+    },
+    {
+      "file": "case_0159.json",
+      "bundle_sha256": "2faca3d0239993448f01e683291b58705a7019a7df57ae78a3b8aa70d51a9a07",
+      "cohort": "difficult"
+    },
+    {
+      "file": "case_0134.json",
+      "bundle_sha256": "0ef4a3ac79e4b6855d3024659f47e0a97eeb6a7f1b2ecb7804c5bdc5d69bb340",
+      "cohort": "difficult"
+    },
+    {
+      "file": "case_0109.json",
+      "bundle_sha256": "5f16f0150234b339ce0fa499ffc7305982d3ac4940397e84adb8eb8782735035",
+      "cohort": "difficult"
+    },
+    {
+      "file": "case_0064.json",
+      "bundle_sha256": "d73235edc8aafcc36577cc9a0c1bce5cc905037d054c641a34f43d99458ffd19",
+      "cohort": "difficult"
+    },
+    {
+      "file": "case_0135.json",
+      "bundle_sha256": "53760ad2a978de7b3764a83c9d911d0ea5782fedf8b3576d80069656b86328fb",
+      "cohort": "difficult"
+    },
+    {
+      "file": "case_0013.json",
+      "bundle_sha256": "72a65d8f64fa2755289b13db21a4d489f240aadfe825969e423e03e09e8e3807",
+      "cohort": "difficult"
+    },
+    {
+      "file": "case_0077.json",
+      "bundle_sha256": "73743e5064ffef3e02f960e9dd2d6ddf63f829d09fc7cfc7ff73be88e0f29c54",
+      "cohort": "difficult"
+    },
+    {
+      "file": "case_0097.json",
+      "bundle_sha256": "afe740f7d39a9c74784679ede5120fee144ecaaf3378c5fb40c676d6340e0a76",
+      "cohort": "difficult"
+    },
+    {
+      "file": "case_0009.json",
+      "bundle_sha256": "40dc08d3897f05e26d00ec29c75c0c7a72b1922c896ff8116d5e2cb27f6d5608",
+      "cohort": "difficult"
+    }
+  ],
+  "preparation": "Full validation metadata pool; original images copied and hash-verified after selection. No test queries."
+}

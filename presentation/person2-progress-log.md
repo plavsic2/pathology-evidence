@@ -293,3 +293,16 @@ Remaining dependencies: actual artifacts, agreed shared directory, real frozen c
 - Observed in exported responses: MUC case `11a3e8d3096d83e8` omits MUC from its top-three candidates. The MUS case includes MUS in third position. All four pairs change at least some reference membership; this does not establish greater usefulness.
 - Delta bundle: `/u/plavsic2/person2-priority-validation.zip`. Local bundle directory: `pathology-evidence-starter/artifacts/priority_validation`. Tissue images, model files and review databases remain outside GitHub source commits.
 - Remaining: representative frozen review sample, independent domain feedback, retrieval evaluation owned by Person 1, final held-out evaluation after choices freeze, results figures and final presentation/rehearsal. No preference or clinical benefit result is claimed.
+
+### 8:55 p.m. — Validation review sample frozen and reviewer session ready
+
+**Status: completed preparation; recruitment and usefulness outcomes pending.**
+
+- Prepared metadata pairs from the full 225-query validation pool using the unchanged cached engine on Delta CPU job 22965112, cn004. No test queries, new embeddings, classifier changes or ranking changes.
+- Applied protocol v1.1 with seed 42: 20 random cases plus 10 additional smallest-score-gap cases, reported as separate cohorts. Added two scheduled repeats for 32 trials. Selection was not based on reviewer preferences; do not replace unfavorable cases.
+- Frozen plan fingerprint: `e1f07276281b9f13da84c66d097044e042bd7c54eadeb2c718be4943c388916d`. Plan metadata is versioned in `presentation/review-val-v1-plan.json`.
+- Copied 389 unique original image files. All 30 response fingerprints and query/gallery image hashes passed verification after download. Immutable directory creation prevents silently overwriting this cohort.
+- Added a tested full-pool preparation utility and reviewer-session checklist. All 24 combined automated tests passed. The application ignores the plan metadata JSON when enumerating response pairs.
+- Dedicated reviewer interface runs at `http://127.0.0.1:8504` on this PC. Browser check confirmed real anonymous A/B panels and the practice-completion gate. No real review submissions were made by the agent. Investigator screen remains on port 8503.
+- Delta package `/u/plavsic2/person2-review-val-v1.zip`; extracted local folder `pathology-evidence-starter/artifacts/review_val_v1`. Images remain outside GitHub. Original manifest and shared cache untouched.
+- Remaining: invite domain reviewers through user/team coordination, collect voluntary feedback with roles/sample sizes, combine with Person 1's retrieval metrics, run final held-out evaluation after engineering choices freeze, and build final result figures/slides and rehearse. The frozen random tile subset does not establish patient independence or clinical validity.

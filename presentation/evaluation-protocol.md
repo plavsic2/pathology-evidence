@@ -1,6 +1,6 @@
 # Reference usefulness review protocol version 1.1
 
-Status: analysis and workflow decisions documented before real reviews. The case list, dataset fingerprints and reviewer recruitment are pending actual artifacts. This is an internal protocol, not a registered clinical study.
+Status: validation case list and dataset fingerprints frozen on October 17, 2026, before real reviews. See review-val-v1-plan.json and reviewer-session-checklist.md. Reviewer recruitment and outcomes remain pending. This is an internal protocol, not a registered clinical study.
 
 ## Question and endpoints
 
@@ -11,6 +11,8 @@ Secondary descriptive endpoints: preferences on difficult cases, skips and unans
 ## Sampling before review
 
 Prepare validation response pairs with the unchanged cached engine. Verify all pairs against the authoritative manifest. Default target: 30 original cases, or all available if fewer. Seed: 42. Select two thirds by a seeded random ordering of the available exported pool. Select the remainder from unselected cases with the smallest top-two classifier score gap. This is a fixed sampling rule, not a calibrated definition of uncertainty. The exported pool itself may be a convenience subset; disclose its construction.
+
+Frozen validation v1 uses the full 225-query validation metadata pool, 20 random cases, 10 additional lowest-score-gap cases and two repeats. The utility `evaluation.prepare_cohort` copies only selected images and verifies their original hashes. Plan fingerprint: `e1f07276281b9f13da84c66d097044e042bd7c54eadeb2c718be4943c388916d`. Random selection represents this tile-level validation pool, not independent patients or a clinical population. No preference results were used for selection.
 
 Freeze using `python -m evaluation.review_plan --folder artifacts/review_bundles --manifest data/splits.csv --output artifacts/review_plan.json --count 30`. It refuses to overwrite an existing plan. The plan stores cohort tags, each response fingerprint, the manifest hash and repeat count. A response change requires a new plan version. Do not replace low-quality or unfavorable cases after reviews start. Record technical exclusions separately.
 

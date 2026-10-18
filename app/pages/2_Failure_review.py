@@ -18,7 +18,7 @@ st.title('Failure review')
 st.warning('Investigator view: reveals labels and method identities. Cases opened here cannot be submitted as blinded in this browser session.')
 source = st.sidebar.selectbox('Investigation source', ['Saved response pairs', 'Cached engine'])
 folder = Path(os.environ.get('REVIEW_BUNDLE_DIR', str(ROOT / 'artifacts/review_bundles')))
-paths = sorted(folder.glob('*.json')) if folder.is_dir() else []
+paths = sorted(p for p in folder.glob('*.json') if p.name != 'review_plan.json') if folder.is_dir() else []
 rows, bundles = [], {}
 if source == 'Cached engine':
     st.caption('Uses cached embeddings and classifier only. No live CONCH calls.')

@@ -30,3 +30,13 @@ The investigator app also includes a **Visual evidence** page. The dedicated rev
 5. Do not use this explanation-enhanced screen to collect preferences under the frozen reference-only protocol. Its effects would require a separate evaluation design/version.
 
 Local automated checks use simulated observations and failures, not live API calls or clinical interpretation. An authorized live UI smoke test passed on October 18: one saved validation query, three candidate requests, and all three structured observation responses rendered successfully. Reference enlargement preserved the observations without a new generation. No Delta GPU allocation was started; hosted-service accounting was not measured. The authenticated local preview runs on port 8506 while its process is alive. Further domain review and broader service testing remain outstanding. Generated statements are not verified findings, classifier reasoning, or proof of a tissue category.
+
+## Query selection and comparison polish (October 18)
+
+There is no query-upload control in this MVP. Both modes select existing validation image IDs; saved mode reads exported contrastive pairs and cached mode reads the backend manifest. An arbitrary uploaded image needs an agreed encoding/inference path that the existing query-ID contract does not expose. The source is now stated explicitly in the UI.
+
+The query is pinned in the sidebar on desktop, with a compact sticky query panel for narrow screens. Each reference has an inline enlargement button opening the query and chosen reference in one dialog (columns on wide screens, stacked on narrow screens). Observation sentences are retained but displayed as bullets with bold Query (A) and Reference B/C/D labels. Enlargement does not create underlying detail; generated observations remain unverified.
+
+Use **Save observations for offline replay** to save a local, exact-analysis-fingerprint-bound copy under `artifacts/evidence_observations` (or `EVIDENCE_SNAPSHOT_DIR`). No key is included. Later sessions can replay it without inference, with a saved-copy caption. Keep artifacts outside source commits. The previously observed successful live smoke-test text was recovered verbatim from its browser output for local replay after a UI rerun cleared the in-memory result; no new service request was made for polish.
+
+Streamlit minimum is now 1.40 for the keyed compact query container and dialog controls. The reference-only review protocol and backend contract are unchanged.

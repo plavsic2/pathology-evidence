@@ -332,3 +332,15 @@ Remaining dependencies: actual artifacts, agreed shared directory, real frozen c
 - Used local cached/exported images and remote hosted inference. No new Delta GPU allocation, embedding extraction or training job was started. Hosted-service quota accounting was not measured and is not claimed to be free.
 - Authenticated preview: `http://127.0.0.1:8506` while this local process runs. Credential and observations live in memory; no automatic explanation persistence is enabled. Generated observations are unverified and do not establish classifier reasoning, diagnosis, or usefulness.
 - Supersedes the earlier live-test-pending status for this single-case smoke test. Further testing should be deliberate and mindful of the team's stated ten-GPU-hour allocation.
+
+### 12:40 p.m. — Query visibility, inline enlargement and readable observations
+
+**Status: implemented and checked; no new inference requests.**
+
+- Read teammate-supplied UI feedback. Kept the query visible in a desktop sidebar and added a compact sticky query on narrow screens. Browser geometry verified its top stayed onscreen after scrolling through evidence. Narrow layouts do not require an open sidebar overlay to retain the query.
+- Added Enlarge Image B/C/D beside each thumbnail. The dialog includes both query and selected reference; warns that enlargement adds no underlying image detail.
+- Converted observation sentences into bullets with bold query/reference labels while retaining generated wording. Arbitrary Markdown syntax from generated text is escaped. No validity claim added.
+- Clarified there is no upload function: the current backend consumes existing validation image IDs. Did not add a nonfunctional arbitrary-image uploader or change the agreed backend API.
+- Added explicit local observation saving and exact-analysis-bound replay to avoid repeat inference during demos. Recovered the exact earlier live smoke-test wording from its browser output after the code rerun cleared the in-memory result; labeled as a saved, unverified copy. No additional Lumen calls, GPU jobs, training or embeddings were generated.
+- Verification: 26 combined tests passed after query/enlargement changes. Then extended the two evidence tests for bold labels, explicit save/replay, retained images and no repeat API calls; both passed. Browser checked pinned query and enlarged real images. Streamlit minimum raised to 1.40 for supported UI containers/dialogs.
+- Source is on the existing Person 2 branch/PR. Saved image/text artifacts remain local and outside GitHub; frozen review sample, backend schema and shared artifacts unchanged.
